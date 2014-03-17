@@ -185,6 +185,8 @@ class OrientationPanel extends JPanel{
     private final JLabel wideLabel; // "Wide"
     private final JLabel narrowLabel;
     private final JLabel squareLabel; 
+    private final JLabel otherLabel;
+    private final JTextField otherField;
     private final ButtonGroup buttons;
 
     public OrientationPanel(Interview interview){
@@ -195,6 +197,9 @@ class OrientationPanel extends JPanel{
         wideButton = new JRadioButton();
         narrowButton = new JRadioButton();
         squareButton = new JRadioButton();
+        
+        otherLabel = new JLabel("Other");
+        otherField = new JTextField(5);
         buttons = new ButtonGroup();
         
         buttons.add(wideButton);
@@ -209,6 +214,8 @@ class OrientationPanel extends JPanel{
 
         else if(squareLabel.getText().equals(interview.getOrientation()))
                 squareButton.setSelected(true);
+        else if(!"".equals(interview.getOrientation())
+        	otherField.setText(interview.getOrientation());
 
         add(orientationLabel);
         add(wideButton);
@@ -217,6 +224,8 @@ class OrientationPanel extends JPanel{
         add(narrowLabel);
         add(squareButton);
         add(squareLabel);
+        add(otherField);
+        add(otherLabel);
     }
     public void submitData(Interview interview){
          if(wideButton.isSelected() == true)
@@ -225,6 +234,8 @@ class OrientationPanel extends JPanel{
             interview.setOrientation(narrowLabel.getText());
         else if(squareButton.isSelected() == true)
             interview.setOrientation(squareLabel.getText());
+        else
+            interview.setOrientation(otherField.getText());
     }
 
 }
